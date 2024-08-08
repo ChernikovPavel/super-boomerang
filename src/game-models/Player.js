@@ -1,5 +1,7 @@
+const { writeScore } = require("../../modules/sequelizer-for-inquirer");
+
 class Player {
-  constructor(fieldSize, score, symbol) {
+  constructor(fieldSize, score, symbol, userId, scoreId) {
     this.position = { x: Math.floor(fieldSize / 2), y: fieldSize - 1 };
     this.symbol = symbol;
     this.score = score;
@@ -29,9 +31,10 @@ class Player {
     }
   }
 
-  die() {
+  async die() {
     console.log("Game Over!");
     console.log(`Вы заработали ${this.score} очков!`);
+    await writeScore(userId, scoreId, this.score);
     process.exit();
   }
 }

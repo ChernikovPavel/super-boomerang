@@ -1,13 +1,12 @@
 const Game = require("./src/controllers/Game.js");
-const startinquirer = require('./modules/inquirer.js')
-
+const startinquirer = require("./modules/inquirer.js");
 
 async function start() {
+  const myArgs = await startinquirer(); // Get userId and scoreId
 
+  const game = new Game(10, 300, "🛸", ...myArgs); // Add userId and scoreId
 
-await startinquirer()
-const game = new Game(10, 300, "🛸");
-
-game.play();
+  game.play();
 }
-start()
+
+start();
