@@ -6,7 +6,7 @@ class Field {
   createField() {
     const field = [];
     for (let i = 0; i < this.fieldSize; i++) {
-      field.push(new Array(this.fieldSize * 2).fill("\u3000"));
+      field.push(new Array(this.fieldSize ).fill("\u3000"));
     }
     return field;
   }
@@ -15,23 +15,24 @@ class Field {
     console.clear();
     const fieldWithEntities = field.map((row, y) =>
       row.map((cell, x) => {
-        if (playerPosition.x === x && playerPosition.y === y) {
+        if (playerPosition.x === y && playerPosition.y ===  x) {
           return userSkin;
         }
         for (const enemy of enemies) {
-          if (enemy.position.x === x && enemy.position.y === y) {
+          if (enemy.position.x === y && enemy.position.y === x) {
             return enemy.skin;
           }
         }
         for (const bullet of bullets) {
-          if (bullet.position.x === x && bullet.position.y === y) {
+          if (bullet.position.x === y && bullet.position.y === x) {
             return bullet.fire;
           }
         }
         return cell;
       })
     );
-    fieldWithEntities.forEach((row) => console.log(row.join(" ")));
+    fieldWithEntities.forEach((row) => console.log(row.reverse().join(" ")));
+    console.log(playerPosition, '\r\n', fieldWithEntities[0].length)
   }
 }
 

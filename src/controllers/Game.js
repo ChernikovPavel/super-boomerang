@@ -7,7 +7,7 @@ const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
 
 class Game {
-  constructor(fieldSize, diffucultValue, skin) {
+  constructor(fieldSize, diffucultValue, skin = '🌻') {
     this.skin = skin;
     this.fieldSize = fieldSize;
     this.diffucultValue = diffucultValue;
@@ -25,13 +25,13 @@ class Game {
 
     process.stdin.on("keypress", (ch, key) => {
       if (key) {
-        if (key.name === "a") {
+        if (key.name === "w") {
           this.player.moveLeft();
-        } else if (key.name === "d") {
-          this.player.moveRight(this.fieldSize);
-        } else if (key.name === "w") {
-          this.player.moveTop();
         } else if (key.name === "s") {
+          this.player.moveRight(this.fieldSize);
+        } else if (key.name === "d") {
+          this.player.moveTop();
+        } else if (key.name === "a") {
           this.player.moveBottom();
         } else if (key.name === "space") {
           this.shoot();
