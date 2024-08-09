@@ -25,13 +25,13 @@ class Game {
 
     process.stdin.on("keypress", (ch, key) => {
       if (key) {
-        if (key.name === "a") {
+        if (key.name === "w") {
           this.player.moveLeft();
-        } else if (key.name === "d") {
-          this.player.moveRight(this.fieldSize);
-        } else if (key.name === "w") {
-          this.player.moveTop();
         } else if (key.name === "s") {
+          this.player.moveRight(this.fieldSize);
+        } else if (key.name === "d") {
+          this.player.moveTop();
+        } else if (key.name === "a") {
           this.player.moveBottom();
         } else if (key.name === "space") {
           this.shoot();
