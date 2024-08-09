@@ -1,3 +1,5 @@
+const {Enemy, Player} = require('../entries')
+const {Render} = require('../render')
 class Game {
   /*prettier-ignore*/
   constructor(playerSkin = 'p', enemySkin = 'e', IndexOfDifficulty, fieldSize = 10) {
@@ -6,8 +8,8 @@ class Game {
         enemyPropSpeed: IndexOfDifficulty * 200,
     }
     this.field = this.fieldGenerator(fieldSize);
-    this.enemySkin = enemySkin;
-    this.player = new Player(playerSkin);
+    this.render = new Render({Player: playerSkin, Enemy: enemySkin})
+    this.player = new Player();
     this.enemies = [new Enemy(), new Enemy(), new Enemy()]
     this.props = []
   }
