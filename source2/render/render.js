@@ -5,16 +5,16 @@ class Render{
         this.str = ''
     }
     toStr(fieldArrayArray){
-        this.str = ''
+        let str = ''
         fieldArrayArray.forEach((fieldArray) => {
-            fieldArray.forEach((cell) => this.str += cell === null ? ' ' : this.skins[cell.constructor.name])
-        this.str += EOL
+            fieldArray.forEach((cell) => str += cell === null ? ' ' : this.skins[cell.constructor.name])
+        str += EOL
     });
-    return this
+    return str
     }
-    toConsole(){
+    toConsole(fieldArrayArray){
         console.clear()
-        console.log(this.str)
+        console.log(this.toStr(fieldArrayArray))
     }
 }
 
