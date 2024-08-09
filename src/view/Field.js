@@ -32,7 +32,6 @@ class Field {
       })
     );
     fieldWithEntities.forEach((row) => console.log(row.reverse().join(" ")));
-
   }
 }
 

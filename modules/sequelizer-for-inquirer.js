@@ -1,9 +1,9 @@
-const { underscoredIf } = require("sequelize/lib/utils");
-const { User, Score } = require("../db/models");
+const { underscoredIf } = require('sequelize/lib/utils');
+const { User, Score } = require('../db/models');
 
 const createUser = async (login, password) => {
   try {
-    console.log("\x1b[8m"); // маскирует лишние логи
+    console.log('\x1b[8m'); // маскирует лишние логи
 
     const FindUserDirty = await User.findAll({ where: { login } });
 
@@ -11,13 +11,13 @@ const createUser = async (login, password) => {
       item.get({ plain: true })
     );
 
-    console.log("\x1b[0m"); // демаскирует
+    console.log('\x1b[0m'); // демаскирует
 
     if (FindUserClean[0]) {
-      throw new Error("Такой логин уже есть!");
+      throw new Error('Такой логин уже есть!');
     }
 
-    console.log("\x1b[8m"); // маскирует лишние логи
+    console.log('\x1b[8m'); // маскирует лишние логи
 
     const newUser = await User.create({ login, password });
 
@@ -26,7 +26,7 @@ const createUser = async (login, password) => {
       userId: newUser.dataValues.id,
     });
 
-    console.log("\x1b[0m"); // демаскирует
+    console.log('\x1b[0m'); // демаскирует
 
     // console.log(
     //   `createUser func. userId = ${newScore.userId}, scoreId = ${newScore.id}`
@@ -38,34 +38,36 @@ const createUser = async (login, password) => {
 
     return result;
   } catch (error) {
-    console.log(error + "\n\nError in creating new User while registering");
+    console.log('\x1b[0m'); // демаскирует
+    console.log(error + '\n\nError in creating new User while registering');
   }
 };
 
 const createScore = async (userId) => {
   try {
-    console.log("\x1b[8m"); // маскирует лишние логи
+    console.log('\x1b[8m'); // маскирует лишние логи
 
     const newScore = await Score.create({
       score: 0,
       userId,
     });
 
-    console.log("\x1b[0m"); // демаскирует
+    console.log('\x1b[0m'); // демаскирует
 
     // console.log(`newScore = ${newScore}`);
 
     return newScore.id;
   } catch (error) {
+    console.log('\x1b[0m'); // демаскирует
     console.error(
-      error + "\n\nError in creating new Score row in DB before begin the game"
+      error + '\n\nError in creating new Score row in DB before begin the game'
     );
   }
 };
 
 const writeScore = async (scoreId, scoreQuantuty) => {
   try {
-    console.log("\x1b[8m"); // маскирует лишние логи
+    console.log('\x1b[8m'); // маскирует лишние логи
 
     const writedScore = await Score.update(
       { score: scoreQuantuty },
@@ -74,24 +76,25 @@ const writeScore = async (scoreId, scoreQuantuty) => {
 
     // console.log("Score was updated in DB after gave over");
 
-    console.log("\x1b[0m"); // демаскирует
+    console.log('\x1b[0m'); // демаскирует
 
     return;
   } catch (error) {
-    console.error(error + "\n\nError in writing score after game to DB");
+    console.log('\x1b[0m'); // демаскирует
+    console.error(error + '\n\nError in writing score after game to DB');
   }
 };
 
 const writeBestScore = async (userId) => {
   try {
-    console.log("\x1b[8m"); // маскирует лишние логи
+    console.log('\x1b[8m'); // маскирует лишние логи
 
     const answerDirty = await Score.findAll({
-      attributes: ["score"],
+      attributes: ['score'],
       where: { userId },
     });
 
-    console.log("\x1b[0m"); // демаскирует
+    console.log('\x1b[0m'); // демаскирует
 
     const answerClear = answerDirty.map((item) => item.get({ plain: true })); // Массив объектов
 
@@ -104,21 +107,22 @@ const writeBestScore = async (userId) => {
     // console.log(`Ваш лучший результат - ${max} очков за игру!`);
     return max;
   } catch (error) {
+    console.log('\x1b[0m'); // демаскирует
     console.error(
-      error + "\n\nError in writing best score after game to console"
+      error + '\n\nError in writing best score after game to console'
     );
   }
 };
 const writeTotalScore = async (userId) => {
   try {
-    console.log("\x1b[8m"); // маскирует лишние логи
+    console.log('\x1b[8m'); // маскирует лишние логи
 
     const answerDirty = await Score.findAll({
-      attributes: ["score"],
+      attributes: ['score'],
       where: { userId },
     });
 
-    console.log("\x1b[0m"); // демаскирует
+    console.log('\x1b[0m'); // демаскирует
 
     const answerClear = answerDirty.map((item) => item.get({ plain: true })); // Массив объектов
 
@@ -131,13 +135,35 @@ const writeTotalScore = async (userId) => {
     // console.log(`\nСуммарно за все игры вы заработали ${sum} очков.`);
     return sum;
   } catch (error) {
+    console.log('\x1b[0m'); // демаскирует
     console.error(
-      error + "\n\nError in writing best score after game to console"
+      error + '\n\nError in writing best score after game to console'
     );
   }
 };
-const writeTopScoreResult = async () => {};
+const writeTopScoreResult = async () => {
+  try {
+    console.log('\x1b[8m'); // маскирует лишние логи
 
+    const answerDirty = await Score.findAll({ include: [{ model: User }] });
+    const ans = answerDirty.map((el) => el.get({ plain: true }));
+
+    let best = { score: 0 };
+    for (let i = 0; i < ans.length; i++) {
+      if (best.score < ans[i].score) best = ans[i];
+    }
+    console.log(best);
+    const res = { user: best.User.login, score: best.score };
+    console.log('\x1b[0m'); // демаскирует
+    return res;
+  } catch (error) {
+    console.log('\x1b[0m'); // демаскирует
+    console.error(
+      error + '\n\nError in writing best score after game to console'
+    );
+    
+  }
+};
 module.exports = {
   createUser,
   createScore,

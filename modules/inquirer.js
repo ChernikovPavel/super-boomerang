@@ -22,6 +22,7 @@ const RegPrompt = async () => {
     return result; // [userId, scoreId]
   } catch (error) {
     console.error(error);
+    process.exit();
   }
 };
 
@@ -64,6 +65,7 @@ const LogPrompt = async () => {
       throw new Error("Вы ввели ошибочные логин и пароль!");
     }
   } catch (error) {
+    console.log('\x1b[0m'); // демаскирует
     console.error(error);
   }
 };
@@ -78,7 +80,7 @@ const logRegPrompt = async () => {
       {
         name: "isRegChoised",
         type: "list",
-        message: "LynxWars 1.0.1",
+        message: "Plants vs Zombies",
         choices: [
           { name: "Вход", value: false },
           { name: "Регистрация", value: true },
@@ -88,7 +90,9 @@ const logRegPrompt = async () => {
 
     return result;
   } catch (error) {
+    console.log('\x1b[0m'); // демаскирует
     console.error(error);
+    process.exit();
     // Prompt couldn't be rendered in the current environment
   }
 
@@ -114,8 +118,9 @@ const logRegPrompt = async () => {
 };
 
 const settingsPromt = async () => {
-  try {
-    return await inquirer
+let data
+
+    await inquirer
     .prompt([
       {
         name: "difficulty",
@@ -131,13 +136,15 @@ const settingsPromt = async () => {
     ])
 
     .then((answers) => {
-      console.log();
+      data = answers.difficulty
     })
     .catch((error) => {
 
       console.log(error);
-      // Prompt couldn't be rendered in the current environment
-    };
+
+    })
+    return data
+
   }
 
 async function startinquirer() {
@@ -153,7 +160,7 @@ async function startinquirer() {
       result = await LogPrompt();
       console.log(`Result from LogPrompt func [a, b] !!! = ${result}`);
     }
-
+    result[2] = await settingsPromt()
     console.log(`myArgs in startinquirer func = ${result}`);
 
     return result;

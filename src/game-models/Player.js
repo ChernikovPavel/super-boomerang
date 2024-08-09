@@ -39,15 +39,20 @@ class Player {
   }
 
   async die() {
+
+    console.log("Game Over!");
+    console.log(`Вы заработали ${this.score} очков!`);
+
     const wtitedScore = await writeScore(this.scoreId, this.score);
     const bestScore = await writeBestScore(this.userId);
     const totalScore = await writeTotalScore(this.userId);
-    const topScoreResult = await writeTopScoreResult();
+    const {user, score} = await writeTopScoreResult();
     console.log(`\nВ этой игре Вы заработали ${this.score} очков.`);
     console.log(`\nВаш лучший результат - ${bestScore} очков за игру!`);
     console.log(`\nСуммарно за все игры вы заработали ${totalScore} очков.`);
     console.log(
-      `\nСуммарно за все игры вы заработали ${topScoreResult} очков.\n\n`
+      ` \nБольше всего очков - ${user} - за одну игру набрал ${score}.\n\n
+   `
     );
     process.exit();
   }

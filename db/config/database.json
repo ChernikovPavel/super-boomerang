@@ -1,7 +1,7 @@
 {
  "development": {
     "username": "main",
-    "password": "1",
+    "password": "123",
     "database": "lynxwars",
     "host": "127.0.0.1",
     "port": "5432",
