@@ -24,7 +24,7 @@ class Enemy {
 
   generateStartPosition(fieldSizeX) {
     this.position = { x: 0, y: 0 };
-    this.position.x = Math.ceil(Math.random() * fieldSizeX * 2 - 1);
+    this.position.x = Math.ceil(Math.random() * fieldSizeX - 1);
   }
 
   moveDown() {
