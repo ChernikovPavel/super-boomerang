@@ -20,6 +20,10 @@ class Game {
     this.setupInput();
   }
 
+  exit(){
+
+    this.player.die()
+  }
   setupInput() {
     keypress(process.stdin);
 
@@ -38,6 +42,9 @@ class Game {
         }
         if (key.ctrl && key.name === "c") {
           process.exit();
+        }
+        if (key.name === "e") {
+          this.exit()
         }
       }
     });
@@ -68,17 +75,16 @@ class Game {
   }
 
   checkCollisions() {
-    this.enemies.forEach((enemy, enemyIndex) => {
+    this.enemies.forEach((enemy, enemyIndex, enemyArray) => {
       if (
         enemy.position.x === this.player.position.x &&
         enemy.position.y === this.player.position.y
       ) {
-        player.play({
-          path: "./src/sounds/congratulations.wav",
-        });
-        setTimeout(() => {
-          this.player.die();
-        }, 2000);
+        player.play({path: "./src/sounds2/achievement.wav"});
+        enemyIndex = enemyArray.length
+        this.exit();
+        clearInterval(this.collisionsInt)
+        console.log(enemyIndex)
       }
       this.bullets.forEach((bullet, bulletIndex) => {
         if (
@@ -123,7 +129,7 @@ class Game {
       this.updateField();
     }, 50);
 
-    setInterval(() => {
+   const collisionsInt = setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
     }, 150);
