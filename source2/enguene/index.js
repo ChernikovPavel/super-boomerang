@@ -1,2 +1,3 @@
 const Sayer = require('./test')
-module.exports = {Sayer}
+const Game = require('./core')
+module.exports = {Sayer, Game}

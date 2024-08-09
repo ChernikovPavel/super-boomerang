@@ -10,3 +10,4 @@ constructor(){
     }
 
 }
+module.exports = Enemy

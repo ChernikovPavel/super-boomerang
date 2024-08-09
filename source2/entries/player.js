@@ -13,3 +13,4 @@ class Player {
     console.log('wot_i_vse')
   }
 }
+module.exports = Player
