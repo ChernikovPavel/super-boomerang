@@ -7,7 +7,7 @@ const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
 
 class Game {
-  constructor(fieldSize, diffucultValue, skin, userId, scoreId) {
+  constructor(fieldSize, diffucultValue, skin = '🌻', userId, scoreId) {
     this.skin = skin;
     this.fieldSize = fieldSize;
     this.diffucultValue = diffucultValue;
@@ -20,24 +20,31 @@ class Game {
     this.setupInput();
   }
 
+  exit(){
+
+    this.player.die()
+  }
   setupInput() {
     keypress(process.stdin);
 
     process.stdin.on("keypress", (ch, key) => {
       if (key) {
-        if (key.name === "a") {
+        if (key.name === "w") {
           this.player.moveLeft();
-        } else if (key.name === "d") {
-          this.player.moveRight(this.fieldSize);
-        } else if (key.name === "w") {
-          this.player.moveTop();
         } else if (key.name === "s") {
+          this.player.moveRight(this.fieldSize);
+        } else if (key.name === "d") {
+          this.player.moveTop();
+        } else if (key.name === "a") {
           this.player.moveBottom();
         } else if (key.name === "space") {
           this.shoot();
         }
         if (key.ctrl && key.name === "c") {
           process.exit();
+        }
+        if (key.name === "e") {
+          this.exit()
         }
       }
     });
@@ -68,17 +75,16 @@ class Game {
   }
 
   checkCollisions() {
-    this.enemies.forEach((enemy, enemyIndex) => {
+    this.enemies.forEach((enemy, enemyIndex, enemyArray) => {
       if (
         enemy.position.x === this.player.position.x &&
         enemy.position.y === this.player.position.y
       ) {
-        player.play({
-          path: "./src/sounds/congratulations.wav",
-        });
-        setTimeout(() => {
-          this.player.die();
-        }, 200);
+        player.play({path: "./src/sounds2/achievement.wav"});
+        enemyIndex = enemyArray.length
+        this.exit();
+        clearInterval(this.collisionsInt)
+        console.log(enemyIndex)
       }
       this.bullets.forEach((bullet, bulletIndex) => {
         if (
@@ -117,11 +123,13 @@ class Game {
   }
 
   async play() {
+    player.play({
+      path: "./src/sounds2/02.-Crazy-Dave-_Intro-Theme_.wav",})
     setInterval(() => {
       this.updateField();
     }, 50);
 
-    setInterval(() => {
+   const collisionsInt = setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
     }, 150);

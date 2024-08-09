@@ -114,41 +114,34 @@ const logRegPrompt = async () => {
 };
 
 const settingsPromt = async () => {
-  await inquirer
+  try {
+    return await inquirer
     .prompt([
       {
         name: "difficulty",
         type: "list",
         message: "Выберите сложность",
         choices: [
-          { name: "Легко", value: 0 },
-          { name: "Нормально", value: 1 },
-          { name: "Сложно", value: 2 },
-          { name: "Кошмар", value: 3 },
-        ],
-      },
-      {
-        name: "skin",
-        type: "list",
-        message: "Выберите скин",
-        choices: [
-          { name: "1", value: 0 },
-          { name: "2", value: 1 },
-          { name: "3", value: 2 },
-          { name: "4", value: 3 },
-        ],
-      },
+          { name: "Легко", value: 350 },
+          { name: "Нормально", value: 300 },
+          { name: "Сложно", value: 250 },
+          { name: "Кошмар", value: 150 },
+        ]
+      }
     ])
+
     .then((answers) => {
       console.log();
     })
     .catch((error) => {
+
       console.log(error);
       // Prompt couldn't be rendered in the current environment
-    });
-};
+    };
+  }
 
 async function startinquirer() {
+
   try {
     const answer = await logRegPrompt();
     let result;
@@ -167,6 +160,7 @@ async function startinquirer() {
   } catch (error) {
     console.error(error);
   }
+
 }
 // await settingsPromt();
 

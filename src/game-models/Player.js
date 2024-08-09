@@ -21,7 +21,7 @@ class Player {
   }
 
   moveRight(fieldSize) {
-    if (this.position.x < fieldSize * 2 - 1) {
+    if (this.position.x < fieldSize - 1) {
       this.position.x++;
     }
   }

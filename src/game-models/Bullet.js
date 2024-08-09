@@ -1,6 +1,6 @@
 class Bullet {
   constructor(position) {
-    this.fire = "🔥";
+    this.fire = "🌞";
     this.position = { x: position.x, y: position.y };
   }
 
