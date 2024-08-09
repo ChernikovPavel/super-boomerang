@@ -10,5 +10,5 @@ const game = new Game(10, 300, "🛸");
 
 game.play();
 }
-// start()
-console.log('💂');
+start()
+// console.log('💂');

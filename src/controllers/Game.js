@@ -117,6 +117,8 @@ class Game {
   }
 
   async play() {
+    player.play({
+      path: "./src/sounds2/02.-Crazy-Dave-_Intro-Theme_.wav",})
     setInterval(() => {
       this.updateField();
     }, 50);
