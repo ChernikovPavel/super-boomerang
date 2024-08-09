@@ -7,10 +7,10 @@ const startinquirer = require('./modules/inquirer.js')
 async function start() {
 
 
-await startinquirer()
-const game = new Game(10, 100);
+const dif = await startinquirer()
+const game = new Game(10, dif.difficulty, "🛸");
 
 game.play();
 }
 start()
-// console.log('💂');
+//console.log('💂');
