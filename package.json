@@ -10,15 +10,18 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^9.7.0",
+    "@eslint/js": "^9.8.0",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
     "sequelize-cli": "^6.6.2"
   },
   "dependencies": {
+    "inquirer": "^10.0.3",
     "keypress": "^0.2.1",
     "node-wav-player": "^0.2.0",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.3",
-    "inquirer": "^10.0.3"
+    "readline-sync": "^1.4.10",
+    "sequelize": "^6.37.3"
   }
 }
