@@ -7,11 +7,11 @@ const Player = require("../game-models/Player");
 const Difficult = require("./dufficult");
 
 class Game {
-  constructor(fieldSize, diffucultValue, skin = '🌻') {
+  constructor(fieldSize, diffucultValue, skin = '🌻', userId, scoreId) {
     this.skin = skin;
     this.fieldSize = fieldSize;
     this.diffucultValue = diffucultValue;
-    this.player = new Player(this.fieldSize, 0, this.skin);
+    this.player = new Player(this.fieldSize, 0, this.skin, userId, scoreId);
     this.enemies = [];
     this.bullets = [];
     this.view = new Field(this.fieldSize);

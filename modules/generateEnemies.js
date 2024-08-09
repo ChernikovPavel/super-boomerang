@@ -1,4 +1,4 @@
-//! Генерация Врагов
+// Генерация Врагов
 function generateEnemies(timeOut) {
   const timerId = setInterval(() => {
     new Enemy();
@@ -9,7 +9,7 @@ function generateEnemies(timeOut) {
   //   }, 5000);
 }
 
-//! Рандомизация интервала.
+// Рандомизация интервала.
 function enemyCreateRandomizer(min, max) {
   return Math.round(min + Math.random() * max);
 }

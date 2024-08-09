@@ -1,13 +1,20 @@
 {
-  "name": "lynxwars",
-  "version": "1.0.0",
-  "description": "",
+  "name": "LynxWars",
+  "version": "1.0.1",
+  "description": "The best game ever!",
   "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mig": "npx sequelize db:migrate",
+    "undoMig": "npx sequelize db:migrate:undo:all",
+    "remigrate": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
+    "seed": "npx sequelize db:seed:all",
+    "undoSeed": "npx sequelize db:seed:all",
+    "createDB": "npx sequelize db:create",
+    "dropDB": "npx sequelize db:drop"
   },
   "keywords": [],
-  "author": "",
+  "author": "Raccons #1 team",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.8.0",
