@@ -1,25 +1,7 @@
 class Enemy {
   constructor(fieldSizeX) {
-    this.generateSkin();
+    this.skin =  "🧟"
     this.generateStartPosition(fieldSizeX);
-  }
-
-  generateSkin() {
-    const skins = [
-      "👾",
-      "💀",
-      "👹",
-      "👻",
-      "👽",
-      "👿",
-      "💩",
-      "🤡",
-      "🤺",
-      "🧛",
-      "🧟",
-      "🎃",
-    ];
-    this.skin = skins[Math.floor(Math.random() * skins.length)];
   }
 
   generateStartPosition(fieldSizeX) {

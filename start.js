@@ -6,7 +6,7 @@ async function start() {
 
 
 await startinquirer()
-const game = new Game(10, 300, "🛸");
+const game = new Game(10, 300);
 
 game.play();
 }
