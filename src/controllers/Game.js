@@ -78,7 +78,7 @@ class Game {
         });
         setTimeout(() => {
           this.player.die();
-        }, 2000);
+        }, 200);
       }
       this.bullets.forEach((bullet, bulletIndex) => {
         if (

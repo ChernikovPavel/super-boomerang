@@ -1,9 +1,16 @@
-const { writeScore } = require("../../modules/sequelizer-for-inquirer");
+const {
+  writeScore,
+  writeBestScore,
+  writeTotalScore,
+  writeTopScoreResult,
+} = require("../../modules/sequelizer-for-inquirer");
 
 class Player {
   constructor(fieldSize, score, symbol, userId, scoreId) {
     this.position = { x: Math.floor(fieldSize / 2), y: fieldSize - 1 };
     this.symbol = symbol;
+    this.userId = userId; // Player`s id in DB
+    this.scoreId = scoreId; // Score`s id in DB
     this.score = score;
   }
 
@@ -32,9 +39,16 @@ class Player {
   }
 
   async die() {
-    console.log("Game Over!");
-    console.log(`Вы заработали ${this.score} очков!`);
-    await writeScore(userId, scoreId, this.score);
+    const wtitedScore = await writeScore(this.scoreId, this.score);
+    const bestScore = await writeBestScore(this.userId);
+    const totalScore = await writeTotalScore(this.userId);
+    const topScoreResult = await writeTopScoreResult();
+    console.log(`\nВ этой игре Вы заработали ${this.score} очков.`);
+    console.log(`\nВаш лучший результат - ${bestScore} очков за игру!`);
+    console.log(`\nСуммарно за все игры вы заработали ${totalScore} очков.`);
+    console.log(
+      `\nСуммарно за все игры вы заработали ${topScoreResult} очков.\n\n`
+    );
     process.exit();
   }
 }
