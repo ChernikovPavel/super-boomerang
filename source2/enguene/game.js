@@ -2,7 +2,7 @@ const {Enemy, Player} = require('../entries')
 const {Render} = require('../render')
 class Game {
   /*prettier-ignore*/
-  constructor(playerSkin = 'p', enemySkin = 'e', IndexOfDifficulty, fieldSize = 10) {
+  constructor(playerSkin = '🌻', enemySkin = '🧟', IndexOfDifficulty = 1, fieldSize = 10) {
     this.config = {
         enemySpeed: IndexOfDifficulty * 500,
         enemyPropSpeed: IndexOfDifficulty * 200,
