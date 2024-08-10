@@ -1,5 +1,6 @@
 # Logs
 my.js
+trash/
 logs
 *.log
 npm-debug.log*
