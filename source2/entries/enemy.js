@@ -2,7 +2,7 @@ const { Render } = require('../render');
 const Player = require('./Player');
 
 class Enemy {
-  constructor({ enemies, config: { fieldSize } }) {
+  constructor({config: { fieldSize } }) {
     this.x = fieldSize - 1;
     this.y = Math.floor(Math.random() * fieldSize);
   }

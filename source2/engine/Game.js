@@ -3,7 +3,7 @@ const { Render } = require('../render');
 const keypress = require('keypress')
 class Game {
   /*prettier-ignore*/
-  constructor(playerSkin = '🌻', enemySkin = '🧟', IndexOfDifficulty = 1, fieldSize = 10) {
+  constructor(IndexOfDifficulty = 1, fieldSize = 10, playerSkin = '🌻', enemySkin = '🧟') {
     this.config = {
       skins: {Player: playerSkin, Enemy: enemySkin, Bullet: '🌞'},
         fieldSize: fieldSize,
@@ -66,11 +66,7 @@ class Game {
     setInterval(() => this.props.forEach((el) => el.moveRight(this)), 100)
     return this;
   }
-  intervals() {
 
-  }
-
-  fieldGenerator() {}
 }
 
 module.exports = Game;

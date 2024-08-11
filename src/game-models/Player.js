@@ -27,13 +27,13 @@ class Player {
   }
 
   moveTop() {
-    if (this.position.y < 9) {
+    if (this.position.y > 0) {
       this.position.y--;
     }
   }
 
-  moveBottom() {
-    if (this.position.y < 9) {
+  moveBottom(fieldSize) {
+    if (this.position.y < fieldSize - 1) {
       this.position.y++;
     }
   }

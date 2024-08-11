@@ -6,11 +6,6 @@ const Field = require('../view/Field');
 const Player = require('../game-models/Player');
 const Difficult = require('./dufficult');
 
-let collisionsInt;
-let collisionsInt1;
-let collisionsInt2;
-let collisionsInt3;
-let collisionsInt4;
 class Game {
   constructor(fieldSize, diffucultValue, skin = '🌻', userId, scoreId) {
     this.skin = skin;
@@ -27,11 +22,7 @@ class Game {
   }
 
   exit() {
-    clearInterval(collisionsInt);
-    clearInterval(collisionsInt1);
-    clearInterval(collisionsInt2);
-    clearInterval(collisionsInt3);
-    clearInterval(collisionsInt4);
+
     this.player.die();
   }
   setupInput() {
@@ -40,13 +31,13 @@ class Game {
     process.stdin.on('keypress', (ch, key) => {
       if (key) {
         if (key.name === 'w') {
-          this.player.moveLeft();
+          this.player.moveLeft(this.fieldSize);
         } else if (key.name === 's') {
           this.player.moveRight(this.fieldSize);
         } else if (key.name === 'd') {
-          this.player.moveTop();
+          this.player.moveTop(this.fieldSize);
         } else if (key.name === 'a') {
-          this.player.moveBottom();
+          this.player.moveBottom(this.fieldSize);
         } else if (key.name === 'space') {
           this.shoot();
         }
@@ -137,21 +128,21 @@ class Game {
     player.play({
       path: './src/sounds2/02.-Crazy-Dave-_Intro-Theme_.wav',
     });
-    collisionsInt4 = setInterval(() => {
+    setInterval(() => {
       this.updateField();
     }, 50);
 
-    collisionsInt1 = setInterval(() => {
+    setInterval(() => {
       this.moveBullets();
       this.checkCollisions();
     }, 150);
 
-    collisionsInt2 = setInterval(() => {
+    setInterval(() => {
       this.moveEnemies();
       this.checkCollisions();
     }, this.diffucult.enemySpeed);
 
-    collisionsInt3 = setInterval(() => {
+    setInterval(() => {
       this.enemies.push(new Enemy(this.fieldSize));
     }, this.diffucult.enemyCreateSpeed);
   }

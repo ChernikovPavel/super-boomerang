@@ -1,2 +1,2 @@
-const Game = require('./Game')
+const Game = require('./game')
 module.exports = {Game}

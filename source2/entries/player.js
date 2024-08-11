@@ -8,18 +8,12 @@ class Player {
     this.y = 5;
   }
   move({field, config},deltaX, deltaY) {
-    field[this.y][this.x] = field[this.y][this.x].filter((el, i, arr) => {
-      if (el === this) {
-        i = arr.length;
-        return false;
-      }
-      return true;
-    });
+    field[this.y][this.x].shift()
     this.x = Math.max(Math.min((this.x + deltaX), 9), 0);
     this.y = Math.max(Math.min((this.y + deltaY), 9), 0);
     field[this.y][this.x].unshift(this)
+    
     if(field[this.y][this.x].some((el) => el.constructor.name === 'Enemy')) {
-
       this.die({ field, config })
     }
 
