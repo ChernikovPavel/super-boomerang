@@ -46,12 +46,19 @@ class Game {
   }
 
   start() {
+    this.setupInput()
     if (arguments[0]) {
-      setInterval(() => Render.debug(this, arguments), 50);
+      const filteredArguments = []
+      for(let i = 0; i < arguments.length; i++){
+        if(arguments[i]) {filteredArguments.push(arguments[i])}
+      }
+      let isNeededToRenderField = true
+      filteredArguments.forEach((el, i, a) => {if(el === 'no-render') {isNeededToRenderField = false; a.splice(i, 1) ; i = a.length}})
+      setInterval(() => Render.debug(this, filteredArguments, isNeededToRenderField), 50);
     } else {
       setInterval(() => Render.log(this), 50);
     }
-    this.setupInput()
+
 
 
     setInterval(() => {this.enemies.push(new Enemy(this))}, this.config.enemySpawnSpeed)

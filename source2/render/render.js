@@ -1,5 +1,6 @@
 const { EOL } = require('os');
 class Render {
+  
   static toStr(array, skins, filler) {
     let str = '';
     for (let i = 0; i < array.length; i++) {
@@ -10,14 +11,29 @@ class Render {
     }
     return str;
   }
+
   static log({ field, config: { skins } }) {
     console.clear();
     console.log(this.toStr(field, skins, '  '));
   }
-  static debug({ field, config: { skins }, enemies, player, props }, args) {
+
+  static debug(
+    { field, config, config: { skins }, enemies, player, props },
+    args,
+    isNeededToRenderField
+  ) {
     console.clear();
-    console.log(this.toStr(field, skins, '. '));
-    // console.table(field);
+    if (isNeededToRenderField) {
+      console.log(this.toStr(field, skins, '. '));
+    }
+    args.forEach((el, i) => {
+      if (el === 'field') {
+        console.table(field);
+        i++;
+      } else {
+        console.log(eval(el));
+      }
+    });
   }
 }
 
