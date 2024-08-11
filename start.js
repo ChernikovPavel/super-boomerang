@@ -15,4 +15,10 @@ async function start() {
     process.exit();
   }
 }
+
+async function startDebug() {
+    const game = new Game(10, 100, '🌻', 1, 1); // Add userId and scoreId
+      await game.play();
+}
+
 start();

@@ -1,2 +1,2 @@
-const Render = require('./render')
+const Render = require('./Render')
 module.exports = {Render}

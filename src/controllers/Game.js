@@ -22,8 +22,8 @@ class Game {
     this.view = new Field(this.fieldSize);
     this.diffucult = new Difficult(this.diffucultValue);
     this.field = this.view.createField(this.fieldSize);
+    this.play();
     this.setupInput();
-    this.play()
   }
 
   exit() {
@@ -35,7 +35,7 @@ class Game {
     this.player.die();
   }
   setupInput() {
-    // keypress(process.stdin);
+    keypress(process.stdin);
 
     process.stdin.on('keypress', (ch, key) => {
       if (key) {
@@ -93,6 +93,7 @@ class Game {
         player.play({ path: './src/sounds2/achievement.wav' });
         enemyIndex = enemyArray.length;
         this.exit();
+
       }
 
       this.enemies.forEach((enemy) => {
@@ -100,10 +101,10 @@ class Game {
           player.play({
             path: './src/sounds/congratulations.wav',
           });
-          setTimeout(() => {
-            enemyIndex = enemyArray.length;
-            this.exit();
-          }, 2000);
+
+          enemyIndex = enemyArray.length;
+          this.exit();
+
         }
       });
 

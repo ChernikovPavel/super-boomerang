@@ -1,3 +1,4 @@
-const Enemy = require('./enemy')
-const Player = require('./player')
-module.exports = {Enemy, Player}
+const Enemy = require('./Enemy')
+const Player = require('./Player')
+const Bullet = require('./Bullet')
+module.exports = {Enemy, Player, Bullet}
