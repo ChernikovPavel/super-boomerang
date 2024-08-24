@@ -26,10 +26,9 @@ class Render {
     if (isNeededToRenderField) {
       console.log(this.toStr(field, skins, '. '));
     }
-    args.forEach((el, i) => {
+    args.forEach((el) => {
       if (el === 'field') {
         console.table(field);
-        i++;
       } else {
         console.log(eval(el));
       }
